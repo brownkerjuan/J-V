@@ -1,0 +1,44 @@
+/* Global styles */
+body {
+    background-color: #f2f2f2;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Header styles */
+header {
+    background-color: #ff6f61;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #ff6f61;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Button styles */
+button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff4c39;
+}
+/* Add more styles as needed */
