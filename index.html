@@ -3,34 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day</title>
+    <title>Valentine's Day Love Meter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffe6e6;
-            padding: 20px;
-        }
-        h1 {
-            color: #ff4d4d;
-        }
-        p {
-            font-size: 1.2em;
-            color: #333;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ff4d4d;
+            background: url('https://example.com/background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 50px;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        #questionContainer {
+            margin-top: 100px;
+        }
+        .celebration {
+            display: none;
+            font-size: 40px;
+        }
+        #loveMessage {
+            font-size: 30px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Happy Valentine's Day!</h1>
-    <p>Welcome to our special Valentine's Day website. Here, you will find everything you need to celebrate love!</p>
-    <a href="#">Explore More</a>
+    <div class="emoji">💖</div>
+    <div class="emoji">🐻</div>
+
+    <h1>Valentine's Day Love Meter</h1>
+    <div id="questionContainer">
+        <p>1. Do you like me?</p>
+        <button id="likeButton">Yes</button>
+        <button id="dislikeButton">No</button>
+        <div id="sliderContainer" class="hidden">
+            <p>2. How much do you love me?</p>
+            <input type="range" id="loveSlider" min="0" max="100" value="50">
+            <div id="loveMessage">Love Level: 50</div>
+            <p>3. Will you be my Valentine?</p>
+            <button id="valentineButton">Yes!</button>
+        </div>
+        <div class="celebration hidden" id="celebrationScreen">
+            🎉💖🎉💖🎉
+        </div>
+    </div>
+
+    <script>
+        const loveSlider = document.getElementById('loveSlider');
+        const loveMessage = document.getElementById('loveMessage');
+        const sliderContainer = document.getElementById('sliderContainer');
+        const celebrationScreen = document.getElementById('celebrationScreen');
+
+        document.getElementById('likeButton').onclick = function() {
+            sliderContainer.classList.remove('hidden');
+        };
+
+        loveSlider.oninput = function() {
+            loveMessage.innerText = 'Love Level: ' + this.value;
+        };
+
+        document.getElementById('valentineButton').onclick = function() {
+            celebrationScreen.classList.remove('hidden');
+            sliderContainer.classList.add('hidden');
+            setTimeout(() => {
+                celebrationScreen.classList.add('hidden');
+            }, 3000);
+        };
+    </script>
 </body>
 </html>
