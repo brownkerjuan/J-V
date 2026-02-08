@@ -3,83 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Love Meter</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Valentine's Day Interactive Experience</title>
     <style>
-        body {
-            background: url('https://example.com/background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-        }
-        .hidden {
-            display: none;
-        }
-        .emoji {
-            position: absolute;
-            font-size: 50px;
-            animation: float 5s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-        #questionContainer {
-            margin-top: 100px;
-        }
-        .celebration {
-            display: none;
-            font-size: 40px;
-        }
-        #loveMessage {
-            font-size: 30px;
-            margin-top: 20px;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f0f8ff; text-align: center; }
+        .hidden { display: none; }
+        .heart { color: red; font-size: 2em; animation: float 3s infinite; }
+        @keyframes float { 0% { transform: translatey(0); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0); } }
     </style>
 </head>
 <body>
-    <div class="emoji">💖</div>
-    <div class="emoji">🐻</div>
-
-    <h1>Valentine's Day Love Meter</h1>
-    <div id="questionContainer">
-        <p>1. Do you like me?</p>
-        <button id="likeButton">Yes</button>
-        <button id="dislikeButton">No</button>
-        <div id="sliderContainer" class="hidden">
-            <p>2. How much do you love me?</p>
-            <input type="range" id="loveSlider" min="0" max="100" value="50">
-            <div id="loveMessage">Love Level: 50</div>
-            <p>3. Will you be my Valentine?</p>
-            <button id="valentineButton">Yes!</button>
+    <h1>Welcome to the Valentine's Day Interactive Experience!</h1>
+    <div id="questions">
+        <h2>Answer These Questions:</h2>
+        <div id="question1">
+            <p>What is your love language?</p>
+            <input type="text" id="answer1">
         </div>
-        <div class="celebration hidden" id="celebrationScreen">
-            🎉💖🎉💖🎉
+        <div id="question2" class="hidden">
+            <p>Describe your ideal date!</p>
+            <input type="text" id="answer2">
+        </div>
+        <div id="question3" class="hidden">
+            <p>What does love mean to you?</p>
+            <input type="text" id="answer3">
+        </div>
+        <button id="next">Next</button>
+    </div>
+    <div id="loveMeter" class="hidden">
+        <h2>Your Love Meter!</h2>
+        <input type="range" id="loveInput" min="0" max="100" value="50">
+        <p id="loveLevel">50%</p>
+    </div>
+    <div id="celebrationScreen" class="hidden">
+        <h2>❤️ Love Celebration! ❤️</h2>
+        <p>Thank you for sharing your thoughts!</p>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart">❤️</span>
+            <span class="heart">❤️</span>
         </div>
     </div>
-
     <script>
-        const loveSlider = document.getElementById('loveSlider');
-        const loveMessage = document.getElementById('loveMessage');
-        const sliderContainer = document.getElementById('sliderContainer');
+        let currentQuestion = 0;
+        const questions = document.getElementById('questions');
+        const loveMeter = document.getElementById('loveMeter');
         const celebrationScreen = document.getElementById('celebrationScreen');
+        const nextButton = document.getElementById('next');
 
-        document.getElementById('likeButton').onclick = function() {
-            sliderContainer.classList.remove('hidden');
-        };
+        nextButton.addEventListener('click', () => {
+            if (currentQuestion === 0) {
+                questions.children[0].classList.add('hidden');
+                questions.children[1].classList.remove('hidden');
+            } else if (currentQuestion === 1) {
+                questions.children[1].classList.add('hidden');
+                questions.children[2].classList.remove('hidden');
+            } else if (currentQuestion === 2) {
+                questions.classList.add('hidden');
+                loveMeter.classList.remove('hidden');
+            } else if (currentQuestion === 3) {
+                loveMeter.classList.add('hidden');
+                celebrationScreen.classList.remove('hidden');
+            }
+            currentQuestion++;
+        });
 
-        loveSlider.oninput = function() {
-            loveMessage.innerText = 'Love Level: ' + this.value;
-        };
-
-        document.getElementById('valentineButton').onclick = function() {
-            celebrationScreen.classList.remove('hidden');
-            sliderContainer.classList.add('hidden');
-            setTimeout(() => {
-                celebrationScreen.classList.add('hidden');
-            }, 3000);
-        };
+        const loveInput = document.getElementById('loveInput');
+        const loveLevel = document.getElementById('loveLevel');
+        loveInput.addEventListener('input', () => {
+            loveLevel.innerText = loveInput.value + '%';
+        });
     </script>
 </body>
 </html>
