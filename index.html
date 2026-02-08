@@ -1,1 +1,36 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Happy Valentine's Day!</title>\n    <style>\n        body {\n            background-color: #ffcccb;\n            color: #red;\n            font-family: 'Arial', sans-serif;\n            text-align: center;\n            padding: 50px;\n        }\n        h1 {\n            font-size: 3em;\n            margin-bottom: 20px;\n        }\n        #heart {\n            font-size: 100px;\n            animation: heartBeat 1s infinite;\n        }\n        @keyframes heartBeat {\n            0%, 100% { transform: scale(1); }\n            50% { transform: scale(1.1); }\n        }\n    </style>\n</head>\n<body>\n    <h1>Happy Valentine's Day!</h1>\n    <div id="heart">❤️</div>\n    <p>"Love is composed of a single soul inhabiting two bodies." - Aristotle</p>\n    <script>\n        const heart = document.getElementById('heart');\n        heart.addEventListener('click', () => {\n            alert('Spread love everywhere you go!');\n        });\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff4d4d;
+        }
+        p {
+            font-size: 1.2em;
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day!</h1>
+    <p>Welcome to our special Valentine's Day website. Here, you will find everything you need to celebrate love!</p>
+    <a href="#">Explore More</a>
+</body>
+</html>
