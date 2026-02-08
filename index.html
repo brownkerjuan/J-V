@@ -3,76 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Valentine's Day Interactive Experience</title>
+    <title>Valentine's Interactive Website</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f8ff; text-align: center; }
-        .hidden { display: none; }
-        .heart { color: red; font-size: 2em; animation: float 3s infinite; }
-        @keyframes float { 0% { transform: translatey(0); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0); } }
+        body {
+            background: linear-gradient(#ffafbd, #ffc3a0);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        h1 { margin-top: 50px; }
+        button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .heart, .bear { 
+            position: absolute;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Valentine's Day Interactive Experience!</h1>
+    <h1>Valentine's Day Interactive Website</h1>
     <div id="questions">
-        <h2>Answer These Questions:</h2>
-        <div id="question1">
-            <p>What is your love language?</p>
-            <input type="text" id="answer1">
+        <div class="question" id="likeMe">
+            <p>Do you like me?</p>
+            <button onclick="showNext('loveMeter')">Yes</button>
+            <button onclick="showNext('valentineOffer')">No</button>
         </div>
-        <div id="question2" class="hidden">
-            <p>Describe your ideal date!</p>
-            <input type="text" id="answer2">
+        <div class="question" id="loveMeter" style="display:none;">
+            <p>How much do you love me?</p>
+            <input type="range" min="1" max="100" value="50" class="slider" id="loveLevel">
+            <p>Love Level: <span id="levelValue">50</span>%</p>
+            <button onclick="showNext('valentineOffer')">Submit</button>
         </div>
-        <div id="question3" class="hidden">
-            <p>What does love mean to you?</p>
-            <input type="text" id="answer3">
+        <div class="question" id="valentineOffer" style="display:none;">
+            <p>Will you be my Valentine?</p>
+            <button onclick="celebrate()">Of Course!</button>
+            <button onclick="document.getElementById('questions').innerHTML=''">Not Today</button>
         </div>
-        <button id="next">Next</button>
     </div>
-    <div id="loveMeter" class="hidden">
-        <h2>Your Love Meter!</h2>
-        <input type="range" id="loveInput" min="0" max="100" value="50">
-        <p id="loveLevel">50%</p>
-    </div>
-    <div id="celebrationScreen" class="hidden">
-        <h2>❤️ Love Celebration! ❤️</h2>
-        <p>Thank you for sharing your thoughts!</p>
-        <div class="hearts">
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-        </div>
+    <div id="celebrationScreen" style="display:none;">
+        <h1>❤️ YAY! Happy Valentine's Day Jasmin! ❤️</h1>
+        <div class="explosion">🎆✨💖💥</div>
     </div>
     <script>
-        let currentQuestion = 0;
-        const questions = document.getElementById('questions');
-        const loveMeter = document.getElementById('loveMeter');
-        const celebrationScreen = document.getElementById('celebrationScreen');
-        const nextButton = document.getElementById('next');
+        function showNext(id) {
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
 
-        nextButton.addEventListener('click', () => {
-            if (currentQuestion === 0) {
-                questions.children[0].classList.add('hidden');
-                questions.children[1].classList.remove('hidden');
-            } else if (currentQuestion === 1) {
-                questions.children[1].classList.add('hidden');
-                questions.children[2].classList.remove('hidden');
-            } else if (currentQuestion === 2) {
-                questions.classList.add('hidden');
-                loveMeter.classList.remove('hidden');
-            } else if (currentQuestion === 3) {
-                loveMeter.classList.add('hidden');
-                celebrationScreen.classList.remove('hidden');
-            }
-            currentQuestion++;
-        });
-
-        const loveInput = document.getElementById('loveInput');
         const loveLevel = document.getElementById('loveLevel');
-        loveInput.addEventListener('input', () => {
-            loveLevel.innerText = loveInput.value + '%';
-        });
+        loveLevel.oninput = function() {
+            document.getElementById('levelValue').innerText = this.value;
+        }
+
+        function celebrate() {
+            document.getElementById('questions').style.display = 'none';
+            document.getElementById('celebrationScreen').style.display = 'block';
+        }
     </script>
+    <div class="heart" style="top: 10px; left: 10%;">❤️</div>
+    <div class="bear" style="top: 20px; right: 10%;">🐻</div>
 </body>
 </html>
